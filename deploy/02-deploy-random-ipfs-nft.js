@@ -2,7 +2,6 @@ const { network, ethers } = require("hardhat")
 const { developmentChains, networkConfig } = require("../helper-hardhat-config")
 const { verify } = require("../utils/verify")
 const { storeImages, storeTokenUriMetadata } = require("../utils/uploadToPinata")
-
 const imagesLocation = "./images/randomNft/"
 
 const metadataTemplate = {
@@ -41,9 +40,9 @@ module.exports = async function ({ getNamedAccounts, deployments }) {
 
     let vrfCoordinatorV2Address, subscriptionId, vrfCoordinatorV2Mock
 
-    if (developmentChains.includes(network.name)) {
+    if (chainId == 31337) {
         vrfCoordinatorV2Mock = await ethers.getContract("VRFCoordinatorV2Mock")
-        vrfCoordinatorV2Address = vrfCoordinatorV2Mock.address
+        vrfCoordinatorV2Address = vrfCoordinatorV2Mock.getAddress()
         const tx = await vrfCoordinatorV2Mock.createSubscription()
         const txReceipt = await tx.wait(1)
         subscriptionId = txReceipt.events[0].args.subId
@@ -72,13 +71,13 @@ module.exports = async function ({ getNamedAccounts, deployments }) {
     })
 
     if (chainId == 31337) {
-        await vrfCoordinatorV2Mock.addConsumer(subscriptionId, randomIpfsNft.address)
+        await vrfCoordinatorV2Mock.addConsumer(subscriptionId, randomIpfsNft.getAddress())
     }
 
     log("--------------------------------------------------------")
-    if (!developmentChains.includes(network.name) && process.env.ETHSCAN_API_KEY) {
+    if (!developmentChains.includes(network.name) && process.env.ETHERSCAN_API_KEY) {
         log("Verifying...")
-        await verify(randomIpfsNft.address, args)
+        await verify(randomIpfsNft.getAddress(), args)
     }
 }
 

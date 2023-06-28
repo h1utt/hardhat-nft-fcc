@@ -1,5 +1,6 @@
 require("@nomiclabs/hardhat-waffle")
 require("@nomiclabs/hardhat-etherscan")
+require("@nomiclabs/hardhat-ethers");
 require("hardhat-deploy")
 require("solidity-coverage")
 require("hardhat-gas-reporter")
@@ -33,7 +34,7 @@ module.exports = {
     etherscan: {
         apiKey: {
             sepolia: ETHERSCAN_API_KEY,
-        }
+        },
     },
     gasReporter: {
         enabled: false,
@@ -42,7 +43,16 @@ module.exports = {
         noColors: true,
         // coinmarketcap: process.env.COINMARKETCAP_API_KEY,
     },
-    solidity: "0.8.18",
+    solidity: {
+        compilers: [
+            {
+                version: "0.8.8",
+            },
+            {
+                version: "0.6.6",
+            },
+        ],
+    },
     namedAccounts: {
         deployer: {
             default: 0,
@@ -53,5 +63,5 @@ module.exports = {
     },
     mocha: {
         timeout: 10000000, // 10000 secs max
-    }
+    },
 }

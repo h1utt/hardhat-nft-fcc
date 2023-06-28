@@ -11,6 +11,7 @@
   "license": "MIT",
   "devDependencies": {
     "@chainlink/contracts": "^0.6.1",
+    "@nomicfoundation/hardhat-ethers": "3",
     "@nomiclabs/hardhat-ethers": "npm:hardhat-deploy-ethers",
     "@nomiclabs/hardhat-etherscan": "^3.1.7",
     "@nomiclabs/hardhat-waffle": "^2.0.6",
@@ -18,8 +19,8 @@
     "chai": "^4.3.7",
     "dotenv": "^16.0.3",
     "ethereum-waffle": "^4.0.10",
-    "ethers": "5.4",
-    "hardhat": "^2.14.0",
+    "ethers": "6",
+    "hardhat": "2.16.0",
     "hardhat-contract-sizer": "^2.8.0",
     "hardhat-deploy": "^0.11.29",
     "hardhat-gas-reporter": "^1.0.9",
@@ -29,10 +30,17 @@
     "solhint": "^3.4.1",
     "solidity-coverage": "^0.8.2"
   },
+  "dependencies": {
+    "@nomicfoundation/hardhat-chai-matchers": "2",
+    "@nomicfoundation/hardhat-toolbox": "3",
+    "@nomicfoundation/hardhat-verify": "^1.0.3",
+    "@pinata/sdk": "^1.1.23",
+    "@typechain/ethers-v6": "^0.4.0",
+    "@typechain/hardhat": "8",
+    "base-64": "^1.0.0",
+    "base64-sol": "^1.1.0"
+  },
   "mocha": {
     "timeout": 10000000
-  },
-  "dependencies": {
-    "@pinata/sdk": "^1.1.23"
   }
 }

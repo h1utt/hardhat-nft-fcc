@@ -34,7 +34,7 @@ const { developmentChains } = require("../../helper-hardhat-config")
                   const fee = await randomIpfsNft.getMintFee()
                   await expect(
                       randomIpfsNft.requestNft({
-                          value: fee.sub(ethers.utils.parseEther("0.001")),
+                          value: fee.sub(ethers.parseEther("0.001")),
                       })
                   ).to.be.revertedWith("RandomIpfsNft__NeedMoreETHSent")
               })
@@ -69,7 +69,7 @@ const { developmentChains } = require("../../helper-hardhat-config")
                           const requestNftReceipt = await requestNftResponse.wait(1)
                           await vrfCoordinatorV2Mock.fulfillRandomWords(
                               requestNftReceipt.events[1].args.requestId,
-                              randomIpfsNft.address
+                              randomIpfsNft.getAddress()
                           )
                       } catch (e) {
                           console.log(e)
