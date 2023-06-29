@@ -23,7 +23,7 @@ module.exports = async function ({ getNamedAccounts }) {
             console.log(`Random IPFS NFT index 0 tokenURI: ${await randomIpfsNft.tokenURI(0)}`)
             resolve()
         })
-        if (chaindId == 31337) {
+        if (chainId == 31337) {
             const requestId = randomIpfsNftMintTxReceipt.events[1].args.requestId.toString()
             const vrfCoordinatorV2Mock = await ethers.getContract("VRFCoordinatorV2Mock", deployer)
             await vrfCoordinatorV2Mock.fulfillRandomWords(requestId, randomIpfsNft.address)
