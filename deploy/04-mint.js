@@ -26,12 +26,12 @@ module.exports = async function ({ getNamedAccounts }) {
         if (chaindId == 31337) {
             const requestId = randomIpfsNftMintTxReceipt.events[1].args.requestId.toString()
             const vrfCoordinatorV2Mock = await ethers.getContract("VRFCoordinatorV2Mock", deployer)
-            await vrfCoordinatorV2Mock.fulfillRandomWords(requestId, randomIpfsNft.getAddress())
+            await vrfCoordinatorV2Mock.fulfillRandomWords(requestId, randomIpfsNft.address)
         }
     })
 
     // Dynamic SVG NFT
-    const highValue = ethers.parseEther("4000")
+    const highValue = ethers.utils.parseEther("4000")
     const dynamicSvgNft = await ethers.getContract("DynamicSvgNft", deployer)
     const dynamicSvgNftMintTx = await dynamicSvgNft.mintNft(highValue)
     await dynamicSvgNftMintTx.wait(1)

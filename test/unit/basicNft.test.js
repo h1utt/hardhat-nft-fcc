@@ -38,7 +38,7 @@ const { developmentChains } = require("../../helper-hardhat-config")
                   assert.equal(tokenURI, await basicNft.TOKEN_URI())
               })
               it("Show the correct balance and owner of an NFT", async function () {
-                  const deployerAddress = deployer.getAddress()
+                  const deployerAddress = deployer.address
                   const deployerBalance = await basicNft.balanceOf(deployerAddress)
                   const owner = await basicNft.ownerOf("0")
 

@@ -4,7 +4,7 @@ const { DECIMALS, INITIAL_PRICE } = require("../helper-hardhat-config")
 module.exports = async function (hre) {
     const { deployments, getNamedAccounts, network, ethers } = hre
 
-    const BASE_FEE = ethers.parseEther("0.25") // 0.25 is the premium. It costs 0.25 LINK per request
+    const BASE_FEE = "250000000000000000" // 0.25 is the premium. It costs 0.25 LINK per request
     const GAS_PRICE_LINK = 1e9 // 1000000000 // link per gas
 
     const { deploy, log } = deployments
@@ -27,4 +27,4 @@ module.exports = async function (hre) {
         log("---------------------------------------")
     }
 }
-module.exports.tags = ["all", "mocks"]
+module.exports.tags = ["all", "mocks", "main"]

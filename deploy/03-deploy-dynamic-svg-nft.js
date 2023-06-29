@@ -11,8 +11,8 @@ module.exports = async function ({ getNamedAccounts, deployments }) {
     let ethUsdPriceFeedAddress
 
     if (chainId == 31337) {
-        const EthUsdAggregator = await ethers.getContract("MockV3Aggregator")
-        ethUsdPriceFeedAddress = EthUsdAggregator.getAddress()
+        const EthUsdAggregator = await deployments.get("MockV3Aggregator")
+        ethUsdPriceFeedAddress = EthUsdAggregator.address
     } else {
         ethUsdPriceFeedAddress = networkConfig[chainId].ethUsdPriceFeed
     }
@@ -31,7 +31,7 @@ module.exports = async function ({ getNamedAccounts, deployments }) {
 
     if (!developmentChains.includes(network.name) && process.env.ETHERSCAN_API_KEY) {
         log("Verifying...")
-        await verify(dynamicSvgNft.getAddress(), args)
+        await verify(dynamicSvgNft.address, args)
     }
 }
 

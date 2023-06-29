@@ -32,13 +32,13 @@ const lowTokenUri =
                   const priceFeed = await dynamicSvgNft.getPriceFeed()
                   assert.equal(lowSVG, lowSVGImageuri)
                   assert.equal(highSVG, highSVGimageUri)
-                  assert.equal(priceFeed, mockV3Aggregator.getAddress())
+                  assert.equal(priceFeed, mockV3Aggregator.address)
               })
           })
 
           describe("mintNft", () => {
               it("emits an event and creates the NFT", async function () {
-                  const highValue = ethers.parseEther("1") // 1 dollar per ether
+                  const highValue = ethers.utils.parseEther("1") // 1 dollar per ether
                   await expect(dynamicSvgNft.mintNft(highValue)).to.emit(
                       dynamicSvgNft,
                       "CreatedNFT"
@@ -49,7 +49,7 @@ const lowTokenUri =
                   assert.equal(tokenURI, highTokenUri)
               })
               it("shifts the token uri to lower when the price doesn't surpass the high value", async function () {
-                  const highValue = ethers.parseEther("100000000") // $100,000,000 dollar per ether. Maybe in the distant future this test will fail...
+                  const highValue = ethers.utils.parseEther("100000000") // $100,000,000 dollar per ether. Maybe in the distant future this test will fail...
                   const txResponse = await dynamicSvgNft.mintNft(highValue)
                   await txResponse.wait(1)
                   const tokenURI = await dynamicSvgNft.tokenURI(0)
