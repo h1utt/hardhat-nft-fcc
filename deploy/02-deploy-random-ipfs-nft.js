@@ -2,6 +2,7 @@ const { network, ethers } = require("hardhat")
 const { developmentChains, networkConfig } = require("../helper-hardhat-config")
 const { verify } = require("../utils/verify")
 const { storeImages, storeTokenUriMetadata } = require("../utils/uploadToPinata")
+
 const imagesLocation = "./images/randomNft/"
 
 const metadataTemplate = {
@@ -75,6 +76,7 @@ module.exports = async function ({ getNamedAccounts, deployments }) {
     }
 
     log("--------------------------------------------------------")
+
     if (!developmentChains.includes(network.name) && process.env.ETHERSCAN_API_KEY) {
         log("Verifying...")
         await verify(randomIpfsNft.address, args)

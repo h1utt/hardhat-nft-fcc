@@ -1,10 +1,8 @@
 require("@nomiclabs/hardhat-waffle")
 require("@nomiclabs/hardhat-etherscan")
-require("@nomiclabs/hardhat-ethers");
 require("hardhat-deploy")
 require("solidity-coverage")
 require("hardhat-gas-reporter")
-require("hardhat-contract-sizer")
 require("dotenv").config()
 
 const SEPOLIA_RPC_URL = process.env.SEPOLIA_RPC_URL || "https://eth-sepolia"
@@ -56,9 +54,7 @@ module.exports = {
     namedAccounts: {
         deployer: {
             default: 0,
-        },
-        player: {
-            default: 1,
+            1: 0,
         },
     },
     mocha: {

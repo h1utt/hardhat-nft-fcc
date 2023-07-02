@@ -1,7 +1,7 @@
 const { ethers, network } = require("hardhat")
 const { developmentChains } = require("../helper-hardhat-config")
 
-module.exports = async function ({ getNamedAccounts }) {
+module.exports = async ({ getNamedAccounts }) => {
     const { deployer } = await getNamedAccounts()
     const chainId = network.config.chainId
 
@@ -19,7 +19,7 @@ module.exports = async function ({ getNamedAccounts }) {
 
     await new Promise(async (resolve, reject) => {
         setTimeout(() => reject("Timeout: 'NFTMinted' event did not fire"), 300000) // 5 minutes
-        randomIpfsNft.once("NftMinted", async function () {
+        randomIpfsNft.once("NftMinted", async () => {
             console.log(`Random IPFS NFT index 0 tokenURI: ${await randomIpfsNft.tokenURI(0)}`)
             resolve()
         })

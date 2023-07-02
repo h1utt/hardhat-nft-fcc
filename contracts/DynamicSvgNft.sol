@@ -19,7 +19,7 @@ contract DynamicSvgNft is ERC721, Ownable {
     string private s_lowImageURI;
     string private s_highImageURI;
     AggregatorV3Interface internal immutable i_priceFeed;
-    mapping(uint256 => int256) public s_tokenIdToHighValue;
+    mapping(uint256 => int256) public s_tokenIdToHighValues;
     event CreatedNFT(uint256 indexed tokenId, int256 highValue);
 
     constructor(
@@ -58,7 +58,7 @@ contract DynamicSvgNft is ERC721, Ownable {
     }
 
     function mintNft(int256 highValue) public {
-        s_tokenIdToHighValue[s_tokenCounter] = highValue;
+        s_tokenIdToHighValues[s_tokenCounter] = highValue;
         _safeMint(msg.sender, s_tokenCounter);
         s_tokenCounter = s_tokenCounter + 1;
         emit CreatedNFT(s_tokenCounter, highValue);
@@ -74,7 +74,7 @@ contract DynamicSvgNft is ERC721, Ownable {
         }
         (, int256 price, , , ) = i_priceFeed.latestRoundData();
         string memory imageURI = s_lowImageURI;
-        if (price >= s_tokenIdToHighValue[tokenId]) {
+        if (price >= s_tokenIdToHighValues[tokenId]) {
             imageURI = s_highImageURI;
         }
 
